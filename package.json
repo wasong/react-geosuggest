@@ -71,7 +71,7 @@
     "release:patch": "npm run build:browser && bumpery --verify='npm test' --no-push --no-commit --no-createTag --versionType patch && npm run release:finish",
     "release:minor": "npm run build:browser && bumpery --verify='npm test' --no-push --no-commit --no-createTag --versionType minor && npm run release:finish",
     "release:major": "npm run build:browser && bumpery --verify='npm test' --no-push --no-commit --no-createTag --versionType major && npm run release:finish",
-    "release:finish": "npm run changelog && npm run release:commit && npm run publish:example",
+    "release:finish": "npm run release:commit && npm run publish:example",
     "release:commit": "bumpery --commitFiles 'dist/*.js CHANGELOG.md package.json' --commitMessage 'chore(release): version %VERSION%' --no-bumpVersion",
     "report": "nyc report --reporter=text --reporter=lcov --reporter=html",
     "publish:example": "npm run build:example && gh-pages -d example/dist"
