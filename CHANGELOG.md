@@ -1,3 +1,6 @@
+### 2.3.6 (2017-07-18)
+* Add prop function to retrieve suggests list when populated
+
 ### 2.3.6 (2017-07-13)
 
 
