@@ -44,6 +44,10 @@ class App extends React.Component {
     console.log('onSuggestNoResults for :' + userInput); // eslint-disable-line
   }
 
+  getSuggests(suggests) {
+    console.log(suggests);
+  }
+
   /**
    * Render the example app
    * @return {Function} React render function
@@ -64,6 +68,7 @@ class App extends React.Component {
           onChange={this.onChange}
           onSuggestSelect={this.onSuggestSelect}
           onSuggestNoResults={this.onSuggestNoResults}
+          getSuggests={this.getSuggests}
           location={new google.maps.LatLng(53.558572, 9.9278215)}
           radius="20" />
       </div>
