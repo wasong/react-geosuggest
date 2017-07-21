@@ -255,6 +255,15 @@ class Geosuggest extends React.Component {
       }
     });
 
+    suggests = suggests.map((suggest) => {
+      let data = this.geocode(suggest)
+      console.log(data)
+      let newSuggest = suggest
+      newSuggest.gmaps = data.gmaps
+      newSuggest.location = data.location
+      return newSuggest
+    })
+    console.log(suggests)
     this.props.getSuggests(suggests);
     activeSuggest = this.updateActiveSuggest(suggests);
     this.setState({suggests, activeSuggest}, callback);
@@ -399,6 +408,43 @@ class Geosuggest extends React.Component {
       }
     );
   }
+
+   geocode(suggest) {
+     let options = null;
+     if (suggest.placeId && !suggest.isFixture) {
+       options = {
+         placeId: suggest.placeId
+       };
+     } else {
+       options = {
+         address: suggest.label,
+         location: this.props.location,
+         bounds: this.props.bounds,
+         componentRestrictions: this.props.country ?
+         {country: this.props.country} : null
+       };
+     }
+     let data = {
+      gmaps: null,
+      location: {},
+     }
+     this.geocoder.geocode(
+       options,
+       (results, status) => {
+         if (status === this.googleMaps.GeocoderStatus.OK) {
+           var gmaps = results[0],
+             location = gmaps.geometry.location;
+
+           data.gmaps = gmaps;
+           data.location = {
+             lat: location.lat(),
+             lng: location.lng()
+           };
+         }
+       }
+     );
+     return data
+   }
 
   /**
    * Render the view

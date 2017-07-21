@@ -45,7 +45,7 @@ class App extends React.Component {
   }
 
   getSuggests(suggests) {
-    console.log(suggests);
+    console.log('get', suggests);
   }
 
   /**
